@@ -15,13 +15,23 @@ viewacctserver <- function(input,output,session,dms_token) {
 
   
   shiny::observe({
-    shiny::observeEvent(input$btn_view_acct,
+    shiny::observeEvent(input$btn_hrv_ods_view_acct,
                         {
                             sql = 'select * from rds_hrv_ods_md_acct'
                             
                             data = tsda::sql_select2(token = dms_token, sql = sql)
+                            names(data) = c('编码',
+                                            '名称',
+                                            '全名',
+                                            '余额方向',
+                                            '科目类别',
+                                            '外币核算',
+                                            '核算维度',
+                                            '数据状态',
+                                            '一级科目'
+                            )
                             #显示数据
-                            tsui::run_dataTable2(id = 'view_data_acct', data = data)
+                            tsui::run_dataTable2(id = 'hrv_ods_view_data_acct', data = data)
                             
                             
                  

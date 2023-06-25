@@ -15,13 +15,18 @@ viewacctreclassserver <- function(input,output,session,dms_token) {
 
   
   shiny::observe({
-    shiny::observeEvent(input$btn_view_acctreclass,
+    shiny::observeEvent(input$btn_hrv_ods_view_acctreclass,
                         {
                             sql = 'select * from rds_hrv_ods_md_acctreclass'
                             
                             data = tsda::sql_select2(token = dms_token, sql = sql)
+                            
+                            names(data) = c('编码',
+                                            '实际费用类别',
+                                            '会计科目'
+                            )
                             #显示数据
-                            tsui::run_dataTable2(id = 'view_data_acctreclass', data = data)
+                            tsui::run_dataTable2(id = 'hrv_ods_view_data_acctreclass', data = data)
                             
                             
                  

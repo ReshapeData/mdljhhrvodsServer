@@ -15,13 +15,15 @@ viewcategoryTypeTableserver <- function(input,output,session,dms_token) {
 
   
   shiny::observe({
-    shiny::observeEvent(input$btn_view_categoryTypeTable,
+    shiny::observeEvent(input$btn_hrv_ods_view_categoryTypeTable,
                         {
                             sql = 'select * from rds_hrv_ods_md_categoryTypeTable'
                             
                             data = tsda::sql_select2(token = dms_token, sql = sql)
+                            names(data) = c('业务类型',
+                                            '表名')
                             #显示数据
-                            tsui::run_dataTable2(id = 'view_data_categoryTypeTable', data = data)
+                            tsui::run_dataTable2(id = 'hrv_ods_view_data_categoryTypeTable', data = data)
                             
                             
                  

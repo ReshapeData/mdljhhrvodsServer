@@ -15,13 +15,17 @@ viewfnoteserver <- function(input,output,session,dms_token) {
 
   
   shiny::observe({
-    shiny::observeEvent(input$btn_view_fnote,
+    shiny::observeEvent(input$btn_hrv_ods_view_fnote,
                         {
                             sql = 'select * from rds_hrv_ods_md_fnote'
                             
                             data = tsda::sql_select2(token = dms_token, sql = sql)
+                            names(data) = c('组织类型',
+                                            '业务类型',
+                                            '摘要规范'
+                            )
                             #显示数据
-                            tsui::run_dataTable2(id = 'view_data_fnote', data = data)
+                            tsui::run_dataTable2(id = 'hrv_ods_view_data_fnote', data = data)
                             
                             
                  

@@ -15,13 +15,16 @@ viewcosucompanyserver <- function(input,output,session,dms_token) {
 
   
   shiny::observe({
-    shiny::observeEvent(input$btn_view_cosucompany,
+    shiny::observeEvent(input$btn_hrv_ods_view_cosucompany,
                         {
                             sql = 'select * from rds_hrv_ods_md_cosucompany'
                             
                             data = tsda::sql_select2(token = dms_token, sql = sql)
+                            names(data) = c('项目',
+                                            '编码',
+                                            '名称') 
                             #显示数据
-                            tsui::run_dataTable2(id = 'view_data_cosucompany', data = data)
+                            tsui::run_dataTable2(id = 'hrv_ods_view_data_cosucompany', data = data)
                             
                             
                  

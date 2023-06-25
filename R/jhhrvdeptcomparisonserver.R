@@ -15,13 +15,14 @@ viewdeptcomparisonserver <- function(input,output,session,dms_token) {
 
   
   shiny::observe({
-    shiny::observeEvent(input$btn_view_deptcomparison,
+    shiny::observeEvent(input$btn_hrv_ods_view_deptcomparison,
                         {
                             sql = 'select * from rds_hrv_ods_md_deptcomparison'
                             
                             data = tsda::sql_select2(token = dms_token, sql = sql)
+                            names(data) = c('高新部门', '原部门')
                             #显示数据
-                            tsui::run_dataTable2(id = 'view_data_deptcomparison', data = data)
+                            tsui::run_dataTable2(id = 'hrv_ods_view_data_deptcomparison', data = data)
                             
                             
                  

@@ -15,13 +15,16 @@ viewworkcenterserver <- function(input,output,session,dms_token) {
 
   
   shiny::observe({
-    shiny::observeEvent(input$btn_view_workcenter,
+    shiny::observeEvent(input$btn_hrv_ods_view_workcenter,
                         {
                             sql = 'select * from rds_hrv_ods_md_workcenter'
                             
                             data = tsda::sql_select2(token = dms_token, sql = sql)
+                            names(data) = c('编码',
+                                            '部门名称'
+                            )
                             #显示数据
-                            tsui::run_dataTable2(id = 'view_data_workcenter', data = data)
+                            tsui::run_dataTable2(id = 'hrv_ods_view_data_workcenter', data = data)
                             
                             
                  

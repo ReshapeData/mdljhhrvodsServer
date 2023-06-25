@@ -15,13 +15,19 @@ viewdefaultValueserver <- function(input,output,session,dms_token) {
 
   
   shiny::observe({
-    shiny::observeEvent(input$btn_view_defaultValue,
+    shiny::observeEvent(input$btn_hrv_ods_view_defaultValue,
                         {
                             sql = 'select * from rds_hrv_ods_tpl_defaultValue'
                             
                             data = tsda::sql_select2(token = dms_token, sql = sql)
+                            names(data) = c('凭证模版序号',
+                                            '行号',
+                                            '默认金额',
+                                            '默认名称',
+                                            '默认编码'
+                                            )
                             #显示数据
-                            tsui::run_dataTable2(id = 'view_data_defaultValue', data = data)
+                            tsui::run_dataTable2(id = 'hrv_ods_view_data_defaultValue', data = data)
                             
                             
                  
